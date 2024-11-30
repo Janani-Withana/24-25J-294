@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:device_preview/device_preview.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(
+    DevicePreview(
+        enabled: true, // Set to false for production
+        builder: (context) =>
+            const MyApp(), // Wrap your app with DevicePreview
+      ),
+  );
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
