@@ -1,0 +1,123 @@
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:device_preview/device_preview.dart'; // Add device_preview
+
+void main() => runApp(
+      DevicePreview(
+        enabled: true, // Set to false for production
+        builder: (context) =>
+            const PaddyChatbot(), // Wrap your app with DevicePreview
+      ),
+    );
+
+class PaddyChatbot extends StatelessWidget {
+  const PaddyChatbot({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      useInheritedMediaQuery: true, // Important to use DevicePreview settings
+      locale: DevicePreview.locale(context), // Add locale from DevicePreview
+      builder: DevicePreview.appBuilder, // Add builder from DevicePreview
+      home: const ChatScreen(),
+    );
+  }
+}
+
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _controller = TextEditingController();
+  List<String> messages = [];
+
+  Future<void> sendMessage(String message) async {
+    var url =
+        Uri.parse('http://127.0.0.1:5000/api/chat'); // Convert String to Uri
+    try {
+      var response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: json.encode({'message': message}),
+      );
+
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body);
+        var reply = data['reply'] ?? 'No reply generated from the server';
+
+        // Print user message and bot reply to the terminal
+        print("User: $message");
+        print("Bot reply: $reply");
+
+        setState(() {
+          messages.add("User: $message");
+          messages.add("Bot: $reply");
+        });
+      } else {
+        print("Error: Status code ${response.statusCode}");
+        setState(() {
+          messages.add(
+              "Error: Unable to get a valid response. Status code: ${response.statusCode}");
+        });
+      }
+    } catch (e) {
+      // Print the error in the terminal
+      print("Error while sending message: $e");
+      setState(() {
+        messages.add("Error: $e");
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Paddy Farming Chatbot")),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: ListView.builder(
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                return ListTile(title: Text(messages[index]));
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      hintText: 'Type a message...',
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.send),
+                  onPressed: () {
+                    if (_controller.text.isNotEmpty) {
+                      sendMessage(_controller.text);
+                      _controller.clear();
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
