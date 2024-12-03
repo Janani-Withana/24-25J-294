@@ -1,0 +1,2 @@
+python generate_mock_weather_data.py
+python recommend_fertilizer_time.py
