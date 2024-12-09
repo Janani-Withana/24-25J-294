@@ -21,4 +21,4 @@ The system integrates various technologies to provide a seamless solution for pa
 - **Mobile Application:** Farmers receive alerts and interact with the chatbot for guidance.
 - **Cloud Infrastructure:** Centralized data storage and processing.
 
-![System Overview Diagram](diagram.jpg)
+![System Overview Diagram](frontend/images/system_overview.jpg)
