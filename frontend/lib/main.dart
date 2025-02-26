@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'feature_chatbot/screens/chat_screen.dart';
+import 'core_feature/LoginScreen.dart';
 
 void main() => runApp(
     DevicePreview(
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-      home: const ChatScreen(),
+      home: const LoginScreen(),
     );
   }
 }
