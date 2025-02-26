@@ -3,7 +3,8 @@ import 'package:device_preview/device_preview.dart';
 import 'feature_chatbot/screens/chat_screen.dart';
 import 'core_feature/LoginScreen.dart';
 import 'core_feature/HomeScreen.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'feature_disease_ferti_rec/screens/PaddyDetection.dart';
 void main() => runApp(
     DevicePreview(
         enabled: true, // Set to false for production
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-      home: HomeScreen(),
+      home: PaddyDetection(),
       //home: const LoginScreen(),
       //home: const ChatScreen(),
     );
