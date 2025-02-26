@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'NavBar.dart';
 
@@ -149,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     featureCard(
                       iconPath: 'images/chatbot.png',
-                      title: "ගොවි මිතුරු හදන AI",
+                      title: "ගොවි ගැටලු සඳහා පිළිතුරු",
                       buttonText: "ගොවි ගුරු",
                     ),
                   ],
@@ -178,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title,
             textAlign: TextAlign.center,
             style: GoogleFonts.poppins(
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w500,
               color: Colors.black87,
             ),
