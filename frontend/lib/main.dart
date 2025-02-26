@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       home: PaddyDetection(),
+      //home: HomeScreen(),
       //home: const LoginScreen(),
       //home: const ChatScreen(),
     );
