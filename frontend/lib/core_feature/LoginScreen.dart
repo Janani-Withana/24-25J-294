@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
               // Illustration
               Image.asset(
                 'images/login_illustration.png', // Replace with actual path
-                height: 160,
+                height: 200,
               ),
 
               const SizedBox(height: 20),
@@ -154,13 +154,13 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: Image.asset('images/facebook.png'), // Replace with actual icon
-                    iconSize: 40,
+                    iconSize: 10,
                     onPressed: () {},
                   ),
                   const SizedBox(width: 20),
                   IconButton(
                     icon: Image.asset('images/google.png'), // Replace with actual icon
-                    iconSize: 40,
+                    iconSize: 10,
                     onPressed: () {},
                   ),
                 ],
