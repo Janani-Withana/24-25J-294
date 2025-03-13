@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "687014259299",
+    "firebase_url": "https://nodemcu-592b5-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "nodemcu-592b5",
+    "storage_bucket": "nodemcu-592b5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687014259299:android:0f43dbfa78a11694dee656",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwviWDptQOdYiVMCALTp-bTasztgdnjdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687014259299:android:a8d6776de05cd19adee656",
+        "android_client_info": {
+          "package_name": "com.example.scarecrow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwviWDptQOdYiVMCALTp-bTasztgdnjdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
