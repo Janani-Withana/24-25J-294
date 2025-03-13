@@ -1,0 +1,2 @@
+D:/GitHub/24-25J-294/frontend/android/app/.cxx/Debug/3z6q1r45/x86_64/CMakeFiles/edit_cache.dir
+D:/GitHub/24-25J-294/frontend/android/app/.cxx/Debug/3z6q1r45/x86_64/CMakeFiles/rebuild_cache.dir
