@@ -1,0 +1,25 @@
+age_group,time_to_apply,urea_kg_per_ha,tsp_kg_per_ha,mop_kg_per_ha
+4 - 4 1/2 Months,Basic,,55,
+4 - 4 1/2 Months,3 weeks,50,,
+4 - 4 1/2 Months,6 weeks,75,,25
+4 - 4 1/2 Months,8 weeks,65,,35
+4 - 4 1/2 Months,9 weeks,35,,
+4 - 4 1/2 Months,Total Collection,225,55,60
+3 1/2 Months,Basic,,55,
+3 1/2 Months,3 weeks,50,,
+3 1/2 Months,5 weeks,75,,25
+3 1/2 Months,7 weeks,65,,35
+3 1/2 Months,8 weeks,35,,
+3 1/2 Months,Total Collection,225,55,60
+3 Months,Basic,,55,
+3 Months,2 weeks,50,,
+3 Months,4 weeks,75,,25
+3 Months,6 weeks,65,,35
+3 Months,7 weeks,35,,
+3 Months,Total Collection,225,55,60
+2 1/2 Months,Basic,,55,
+2 1/2 Months,10 Days,50,,
+2 1/2 Months,25 Days,75,,25
+2 1/2 Months,35 Days,65,,35
+2 1/2 Months,42 Days,35,,
+2 1/2 Months,Total Collection,225,55,60

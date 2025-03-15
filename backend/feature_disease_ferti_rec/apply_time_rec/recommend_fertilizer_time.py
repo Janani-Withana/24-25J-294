@@ -1,5 +1,6 @@
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+import requests  # To make API requests
 import random
 
 # Function to load the mock weather data from the file
@@ -8,16 +9,33 @@ def load_mock_weather_data(file_path='mock_weather_data.json'):
         data = json.load(f)
     return data
 
+# Real API call for fetching weather data (commented out)
+# def load_real_weather_data(api_key, location):
+#     url = f"http://api.openweathermap.org/data/2.5/forecast?q={location}&appid={api_key}&units=metric"
+#     response = requests.get(url)
+#     if response.status_code == 200:
+#         data = response.json()
+#         return data
+#     else:
+#         print(f"Error fetching data: {response.status_code}")
+#         return None
+
+
+# IST is UTC +5:30
+IST = timezone(timedelta(hours=5, minutes=30))
+
 # Function to find non-rainy time slots within a given range
 def find_non_rainy_time_slots(weather_data, start_time, end_time):
     available_times = []
     
     for entry in weather_data:
         timestamp = entry["dt"]
-        weather_time = datetime.utcfromtimestamp(timestamp)
+        
+        # Convert the timestamp to IST (Indian Standard Time)
+        weather_time = datetime.fromtimestamp(timestamp, IST)  # Now this will be in IST
         
         # Debugging output to check time
-        print(f"Checking time: {weather_time} with weather condition: {entry['weather'][0]['main']}")
+        # print(f"Checking time: {weather_time} with weather condition: {entry['weather'][0]['main']}")
         
         if start_time <= weather_time <= end_time:
             if entry["weather"][0]["main"] != "Rain" and entry["rain"]["1h"] == 0:
@@ -57,6 +75,10 @@ def recommend_fertilizer_time(location, weather_data, current_time):
 def main():
     # Get the location input (for now hardcoded for testing)
     location_name = input("Enter the location (e.g., Colombo, Kandy): ")
+
+    # Replace the following line with the API call when ready (uncomment the line below)
+    # api_key = "your_api_key_here"
+    # mock_weather_data = load_real_weather_data(api_key, location_name)
     
     # Load mock data (this could be the API call later)
     mock_weather_data = load_mock_weather_data()
@@ -69,10 +91,10 @@ def main():
         return
     
     weather_data = location_data['list']  # Get the weather forecast for the location
-    current_time = datetime.utcnow()  # Get the current time (UTC)
+    current_time = datetime.now(timezone.utc)  # Get the current UTC time (timezone-aware)
 
     # Debugging: Print current time
-    print(f"Current time: {current_time}")
+    print(f"Current UTC time: {current_time}")
     
     # Call recommendation function
     available_times = recommend_fertilizer_time(location_name, weather_data, current_time)

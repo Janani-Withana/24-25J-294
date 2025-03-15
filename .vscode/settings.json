@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./backend/feature_disease_ferti_rec/dicease_detect_2/test_py",
+        "./backend/feature_disease_ferti_rec/dicease_detect_2/train_py"
+    ]
+}
