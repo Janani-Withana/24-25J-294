@@ -46,7 +46,7 @@ def display_image(img_path):
 
 if __name__ == "__main__":
     # Image path to check
-    img_path = 'AAAAAAAAAAA.jpg'  # Replace with the actual image path you want to check
+    img_path = 'VVVVVVVV.jpg'  # Replace with the actual image path you want to check
 
     if os.path.exists(img_path):  # Check if the image exists
         print(f"Uploading image: {img_path}")  # Print message about the image being uploaded

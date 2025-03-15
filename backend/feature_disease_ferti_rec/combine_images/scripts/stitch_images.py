@@ -9,15 +9,14 @@ import time
 # Initialize Firebase with correct credentials
 cred = credentials.Certificate('E:/Research Project/Main_Repo/24-25J-294/backend/feature_disease_ferti_rec/combine_images/firebase_credentials.json')  # Update with your Firebase credentials file path
 firebase_admin.initialize_app(cred, {
-    'storageBucket': 'uee-we-53.appspot.com'  # Corrected bucket name
+    'storageBucket': 'uee-we-53.appspot.com'
 })
 
 # Firebase storage bucket
 bucket = storage.bucket()
 
 # Firebase folder where the images are uploaded
-firebase_folder = 'uploaded_images/'  # Replace with your Firebase folder path
-output_dir = 'E:/Research Project/Main_Repo/24-25J-294/backend/feature_disease_ferti_rec/combine_images/output'  # Local output folder (optional if you want to save locally)
+firebase_folder = 'uploaded_images/'
 
 # Ensure the output directory exists (optional)
 os.makedirs(output_dir, exist_ok=True)
