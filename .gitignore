@@ -1,5 +1,5 @@
 backend/feature_disease_ferti_rec/dicease_detect/train_images/
-backend/feature_disease_ferti_rec/dicease_detect_2/train_images/
+backend/feature_disease_ferti_rec/dicease_detect_2/train_images
 backend/feature_disease_ferti_rec/combine_images/firebase_credentials.json
 backend/feature_disease_ferti_rec/dicease_detect/best_model.keras
 backend/feature_disease_ferti_rec/dicease_detect/final_model.h5

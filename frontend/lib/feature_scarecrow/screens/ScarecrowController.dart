@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core_feature/NavBar.dart';
 
@@ -10,6 +11,7 @@ class ScarecrowController extends StatefulWidget {
 
 class _ScarecrowControllerState extends State<ScarecrowController> {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
+  late FlutterLocalNotificationsPlugin _localNotifications;
 
   int moveScarecrow = 0;
   int sound = 0;
@@ -18,7 +20,20 @@ class _ScarecrowControllerState extends State<ScarecrowController> {
   @override
   void initState() {
     super.initState();
+    _initializeNotifications();
     _listenForChanges();
+  }
+
+  void _initializeNotifications() {
+    _localNotifications = FlutterLocalNotificationsPlugin();
+
+    const AndroidInitializationSettings androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const InitializationSettings settings =
+        InitializationSettings(android: androidSettings);
+
+    _localNotifications.initialize(settings);
   }
 
   void _listenForChanges() {
@@ -39,6 +54,28 @@ class _ScarecrowControllerState extends State<ScarecrowController> {
         light = event.snapshot.value as int? ?? 0;
       });
     });
+
+    // Listen for Detection changes and send notification
+    _database.child('Detection').onValue.listen((event) {
+      int detectionValue = event.snapshot.value as int? ?? 0;
+      if (detectionValue == 1) {
+        _sendNotification("Bird detected", "Scarecrow Moving");
+      }
+    });
+  }
+
+  Future<void> _sendNotification(String title, String body) async {
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+      'channel_id', 'channel_name',
+      importance: Importance.high,
+      priority: Priority.high,
+    );
+
+    const NotificationDetails details =
+        NotificationDetails(android: androidDetails);
+
+    await _localNotifications.show(0, title, body, details);
   }
 
   void _toggleValue(String key, int currentValue) {
@@ -123,4 +160,3 @@ class _ScarecrowControllerState extends State<ScarecrowController> {
     );
   }
 }
-
