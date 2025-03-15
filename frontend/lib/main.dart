@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:frontend/core_feature/HomeScreen.dart';
+import 'package:frontend/feature_scarecrow/screens/GateController.dart';
+import 'package:frontend/feature_scarecrow/screens/ScarecrowController.dart';
 import 'firebase_options.dart'; // Ensure this import exists
 import 'package:frontend/feature_water_management/screens/MoistureScreen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-      home: MoistureScreen(),
+      home: ScarecrowController(),
     );
   }
 }
