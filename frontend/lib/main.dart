@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:frontend/core_feature/HomeScreen.dart';
+import 'package:frontend/feature_scarecrow/screens/GateController.dart';
+import 'package:frontend/feature_scarecrow/screens/ScarecrowController.dart';
 import 'firebase_options.dart'; // Ensure this import exists
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -37,12 +39,15 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       useInheritedMediaQuery: true,
+
       // locale: DevicePreview.locale(context),
       // builder: DevicePreview.appBuilder,
       //home: HomeScreen(),
       //home: LoginScreen(),
       home: const ChatScreen(),
       //home: MoistureScreen(),
+      //home: ScarecrowController(),
+      
     );
   }
 }

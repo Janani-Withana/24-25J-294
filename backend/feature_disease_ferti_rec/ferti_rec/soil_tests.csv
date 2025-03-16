@@ -1,0 +1,21 @@
+id,soil_n,soil_p,soil_k,crop,diseases
+1,15,25,20,Paddy A,Disease Y
+2,30,5,25,Paddy B,
+3,20,15,10,Paddy A,Disease Z
+4,18,12,18,Paddy B,Disease Y
+5,22,8,22,Paddy A,
+6,28,30,28,Paddy B,Disease Z
+7,12,18,14,Paddy A,Disease Y
+8,35,22,30,Paddy B,
+9,17,9,12,Paddy A,Disease Z
+10,24,14,19,Paddy B,
+11,19,11,16,Paddy A,Disease Y
+12,27,20,24,Paddy B,Disease Z
+13,14,7,9,Paddy A,
+14,31,25,27,Paddy B,Disease Y
+15,16,13,11,Paddy A,Disease Z
+16,29,17,23,Paddy B,
+17,13,6,8,Paddy A,Disease Y
+18,32,28,29,Paddy B,Disease Z
+19,21,10,15,Paddy A,
+20,26,19,21,Paddy B,Disease Y

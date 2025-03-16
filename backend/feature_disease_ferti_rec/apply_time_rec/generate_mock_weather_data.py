@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import random
 
 # Function to generate mock weather data for a single location
@@ -86,7 +86,7 @@ locations = [
 ]
 
 # Generate mock weather data for future times only (next 24 hours from now)
-current_time = datetime.utcnow()  # Get current UTC time
+current_time = datetime.now(timezone.utc)  # Get current UTC time (timezone-aware)
 mock_weather_data = generate_mock_data_for_locations(locations, current_time, num_entries=24)
 
 # Save mock data to a JSON file
