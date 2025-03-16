@@ -23,11 +23,11 @@ void main() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   runApp(
-    // DevicePreview(
-    //   enabled: true, // Set to false for production
-    //   builder: (context) => const MyApp(),
-    // ),
-    const MyApp()
+    DevicePreview(
+      enabled: true, // Set to false for production
+      builder: (context) => const MyApp(),
+    ),
+    //const MyApp()
   );
 }
 
@@ -36,12 +36,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       useInheritedMediaQuery: true,
 
-      // locale: DevicePreview.locale(context),
-      // builder: DevicePreview.appBuilder,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       //home: HomeScreen(),
       //home: LoginScreen(),
       home: const ChatScreen(),

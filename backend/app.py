@@ -1,36 +1,75 @@
+# app.py
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import torch
-from nltk.tokenize import word_tokenize
-import torch.nn as nn
-from feature_chatbot.scripts.model_training import Seq2Seq, load_chatbot_model, generate_chatbot_response
 import logging
+import pandas as pd
+import faiss
+import numpy as np
+from sentence_transformers import SentenceTransformer
 
-# Flask app
+from feature_chatbot.scripts import retrieve_answer, generate_refined_answer
+
+
 app = Flask(__name__)
 CORS(app)
 
-# Load chatbot model and vocabularies
-question_vocab = torch.load('/feature_chatbot/models/vocab_question.pth', weights_only=False)
-answer_vocab = torch.load('/feature_chatbot/models/vocab_answer.pth', weights_only=False)
-chatbot_model = load_chatbot_model(question_vocab, answer_vocab)
+# ------------------------------------------------------
+# Load chatbot components (fine-tuned model, CSV, FAISS index)
+# ------------------------------------------------------
+MODEL_PATH = "Janani-Withana/sinhala-farming-qa-model"
+FAISS_INDEX_PATH = "feature_chatbot/data/faiss_index.bin"
+QA_CSV_PATH = "feature_chatbot/data/sinhala_farming_data.csv"
 
-# chatbot route
-@app.route("/api/chat", methods=['POST'])
+try:
+    # Load model
+    embedding_model = SentenceTransformer(MODEL_PATH)
+    # Load CSV
+    df = pd.read_csv(QA_CSV_PATH)
+    # Load FAISS index
+    index = faiss.read_index(FAISS_INDEX_PATH)
+    print("Model, data, and FAISS index loaded successfully.")
+except Exception as e:
+    print(f"Error loading model or data: {e}")
+    embedding_model = None
+
+
+@app.route("/api/chat", methods=["POST"])
 def chat():
+    if embedding_model is None:
+        return jsonify({"error": "Model not loaded."}), 500
+
     try:
         data = request.json
-        question = data.get("message", "")
+        user_query = data.get("message", "")
 
-        if not question:
-           return jsonify({'error': 'No question provided'}), 400
-    
-        response = generate_chatbot_response(chatbot_model, question, question_vocab, answer_vocab)
-        return jsonify({"reply": response})
-   
+        if not user_query:
+            return jsonify({'error': 'No question provided'}), 400
+
+        # Retrieve best match from FAISS
+        best_question, best_answer = retrieve_answer(
+            user_query=user_query,
+            embedding_model=embedding_model,
+            df=df,
+            faiss_index_path=FAISS_INDEX_PATH,
+            threshold=1.0
+        )
+
+        print(best_question,best_answer)
+
+        if best_answer:
+            # (Optional) call generate_refined_answer if you have Gemini or want to post-process
+            final_response = generate_refined_answer(user_query, best_answer)
+            # final_response = generate_refined_answer(user_query, best_answer, gemini_model=None)
+            return jsonify({"reply": final_response})
+        else:
+            return jsonify({"reply": "No suitable answer found."})
+
     except Exception as e:
         logging.error(f"Error occurred: {e}")
         return jsonify({"error": "Internal server error."}), 500
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+if __name__ == "__main__":
+    # Run Flask in debug mode for development
+    app.run(host='0.0.0.0', port=5000, debug=True)
