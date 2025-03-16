@@ -27,7 +27,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Future<void> sendMessage(String message) async {
-    var url = Uri.parse('http://127.0.0.1:5000/api/chat');
+    var url = Uri.parse('http://192.168.8.199:5000/api/chat');
     try {
       var response = await http.post(
         url,
@@ -96,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 16),
                       child: Image.asset(
-                        'images/chatbot_logo.png',
+                        "assets/images/chatbot_logo.png",
                         width: 100,
                         height: 100,
                       ),
