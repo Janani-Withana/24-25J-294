@@ -252,12 +252,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset(
-                    'images/srigoviya_logo.png', // Replace with actual logo asset
+                    'assets/images/srigoviya_logo.png', // Replace with actual logo asset
                     height: 30,
                   ),
                   const CircleAvatar(
                     radius: 18,
-                    backgroundImage: AssetImage('images/profile.png'), // Replace with actual image
+                    backgroundImage: AssetImage('assets/images/profile.png'), // Replace with actual image
                   ),
                 ],
               ),
@@ -318,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     Image.asset(
-                      'images/weather.png', // Replace with weather icon
+                      'assets/images/weather.png', // Replace with weather icon
                       height: 160,
                     ),
                   ],
@@ -347,7 +347,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisSpacing: 15,
                   children: [
                     featureCard(
-                      iconPath: 'images/diagnose.png',
+                      iconPath: 'assets/images/diagnose.png',
                       title: "Diagnose your crop",
                       buttonText: "Diagnose Diseases",
                       onTap: () {
@@ -358,12 +358,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                     featureCard(
-                      iconPath: 'images/soil.png',
+                      iconPath: 'assets/images/soil.png',
                       title: "Follow your soil status",
                       buttonText: "Soil Status",
                     ),
                     featureCard(
-                      iconPath: 'images/water.png',
+                      iconPath: 'assets/images/water.png',
                       title: "Control Water",
                       buttonText: "Irrigation Control",
                       onTap: () {
@@ -374,7 +374,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                     featureCard(
-                      iconPath: 'images/chatbot.png',
+                      iconPath: 'assets/images/chatbot.png',
                       title: "ගොවි ගැටලු සඳහා පිළිතුරු",
                       buttonText: "ගොවි ගුරු",
                     ),

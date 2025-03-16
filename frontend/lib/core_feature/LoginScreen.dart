@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Image.asset(
-                  'images/srigoviya_logo.png', // Replace with actual path
+                  'assets/images/srigoviya_logo.png', // Replace with actual path
                   height: 40,
                 ),
               ),
@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
 
               // Illustration
               Image.asset(
-                'images/login_illustration.png', // Replace with actual path
+                'assets/images/login_illustration.png', // Replace with actual path
                 height: 200,
               ),
 
@@ -153,13 +153,13 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    icon: Image.asset('images/facebook.png'), // Replace with actual icon
+                    icon: Image.asset('assets/images/facebook.png'), // Replace with actual icon
                     iconSize: 10,
                     onPressed: () {},
                   ),
                   const SizedBox(width: 20),
                   IconButton(
-                    icon: Image.asset('images/google.png'), // Replace with actual icon
+                    icon: Image.asset('assets/images/google.png'), // Replace with actual icon
                     iconSize: 10,
                     onPressed: () {},
                   ),
