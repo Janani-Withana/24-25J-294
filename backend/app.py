@@ -18,6 +18,7 @@ CORS(app)
 # Load chatbot components (fine-tuned model, CSV, FAISS index)
 # ------------------------------------------------------
 MODEL_PATH = "Janani-Withana/sinhala-farming-qa-model"
+#MODEL_PATH = "feature_chatbot/models/fine_tuned_multilingual_model"
 FAISS_INDEX_PATH = "feature_chatbot/data/faiss_index.bin"
 QA_CSV_PATH = "feature_chatbot/data/sinhala_farming_data.csv"
 
@@ -52,7 +53,7 @@ def chat():
             embedding_model=embedding_model,
             df=df,
             faiss_index_path=FAISS_INDEX_PATH,
-            threshold = 0.9
+            threshold = 0.8
         )
 
         print(best_question,best_answer)
