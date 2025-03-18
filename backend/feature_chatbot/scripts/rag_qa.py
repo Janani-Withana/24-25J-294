@@ -28,7 +28,7 @@ def fine_tune_embeddings(
     base_model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
     output_dir: str = "fine_tuned_multilingual_model",
     epochs: int = 1,
-    batch_size: int = 16,
+    batch_size: int = 32,
     warmup_steps: int = 100,
 ):
     print(f"Loading base model: {base_model_name}")
@@ -41,9 +41,10 @@ def fine_tune_embeddings(
     for _, row in df.iterrows():
         question = str(row["Question"])
         answer = str(row["Answer"])
+        
         # Positive example
         train_examples.append(InputExample(texts=[question, answer], label=1.0))
-        # (Optional) Add negative examples if you wish
+
 
     train_dataloader = DataLoader(train_examples, shuffle=True, batch_size=batch_size)
     train_loss = losses.MultipleNegativesRankingLoss(model)
@@ -92,7 +93,7 @@ def retrieve_answer(
     embedding_model: SentenceTransformer,
     df: pd.DataFrame,
     faiss_index_path: str = "faiss_index.bin",
-    threshold: float = 1.0
+    threshold: float = 0.9
 ):
     """
     Retrieve the most relevant answer using FAISS similarity search.
@@ -107,9 +108,12 @@ def retrieve_answer(
 
     # Search top K=1
     distances, best_match_idx = index.search(query_embedding, k=1)
+    distance_score = distances[0][0]
+
+    print(f"Distance score: {distance_score:.4f}")
 
     # If the best match score is below threshold, treat it as no relevant answer
-    if distances[0][0] < threshold:
+    if distance_score >= threshold:
         best_idx = best_match_idx[0][0]
         best_question = df.iloc[best_idx]["Question"]
         best_answer = df.iloc[best_idx]["Answer"]
@@ -161,14 +165,13 @@ if __name__ == "__main__":
     FINETUNED_MODEL_DIR = "models/fine_tuned_multilingual_model"
     FAISS_INDEX_PATH = "data/faiss_index.bin"
 
-    # Example usage:
     # A) Fine-tune
     fine_tune_embeddings(
         csv_path=QA_CSV_PATH,
         base_model_name=BASE_MODEL,
         output_dir=FINETUNED_MODEL_DIR,
         epochs=1,
-        batch_size=16,
+        batch_size=32,
         warmup_steps=100
     )
 
