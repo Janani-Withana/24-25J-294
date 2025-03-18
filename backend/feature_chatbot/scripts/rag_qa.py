@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import faiss
 import torch
+import json
 from sentence_transformers import (
     SentenceTransformer,
     InputExample,
@@ -27,9 +28,10 @@ def fine_tune_embeddings(
     csv_path: str,
     base_model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
     output_dir: str = "fine_tuned_multilingual_model",
-    epochs: int = 1,
+    epochs: int = 5,
     batch_size: int = 32,
     warmup_steps: int = 100,
+    log_path: str = "training_logs.json"
 ):
     print(f"Loading base model: {base_model_name}")
     model = SentenceTransformer(base_model_name)
@@ -50,12 +52,25 @@ def fine_tune_embeddings(
     train_loss = losses.MultipleNegativesRankingLoss(model)
 
     print("Starting fine-tuning...")
-    model.fit(
-        train_objectives=[(train_dataloader, train_loss)],
-        epochs=epochs,
-        warmup_steps=warmup_steps,
-        show_progress_bar=True,
-    )
+
+    # Store training loss per epoch
+    training_log = []
+
+    for epoch in range(epochs):
+        loss = model.fit(
+            train_objectives=[(train_dataloader, train_loss)],
+            epochs=1, 
+            warmup_steps=warmup_steps,
+            show_progress_bar=True,
+        )
+        
+        # Log loss for this epoch
+        training_log.append({"epoch": epoch + 1, "loss": loss})
+        
+        # Save logs to JSON
+        with open(log_path, "w") as log_file:
+            json.dump(training_log, log_file)
+
 
     model.save(output_dir)
     print(f"Fine-tuning complete. Model saved to: {output_dir}")
@@ -170,7 +185,7 @@ if __name__ == "__main__":
         csv_path=QA_CSV_PATH,
         base_model_name=BASE_MODEL,
         output_dir=FINETUNED_MODEL_DIR,
-        epochs=1,
+        epochs=5,
         batch_size=32,
         warmup_steps=100
     )
