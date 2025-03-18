@@ -52,18 +52,23 @@ def chat():
             embedding_model=embedding_model,
             df=df,
             faiss_index_path=FAISS_INDEX_PATH,
-            threshold=1.0
+            threshold = 0.9
         )
 
         print(best_question,best_answer)
 
         if best_answer:
-            # (Optional) call generate_refined_answer if you have Gemini or want to post-process
-            final_response = generate_refined_answer(user_query, best_answer)
-            # final_response = generate_refined_answer(user_query, best_answer, gemini_model=None)
-            return jsonify({"reply": final_response})
+            return jsonify({"reply": best_answer})
         else:
-            return jsonify({"reply": "No suitable answer found."})
+            return jsonify({"reply": "සුදුසු පිළිතුරක් නොමැත ⚠️"})
+
+        # (Optional) call generate_refined_answer to process with Gemini
+        # if best_answer:
+        #     final_response = generate_refined_answer(user_query, best_answer)
+        #     return jsonify({"reply": final_response})
+        # else:
+        #     return jsonify({"reply": "No suitable answer found."})
+        
 
     except Exception as e:
         logging.error(f"Error occurred: {e}")
