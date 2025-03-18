@@ -12,6 +12,8 @@ backend/feature_disease_ferti_rec/dicease_detect/X_val.npy
 backend/feature_disease_ferti_rec/dicease_detect/y_test.npy
 backend/feature_disease_ferti_rec/dicease_detect/y_train.npy
 backend/feature_disease_ferti_rec/dicease_detect/y_val.npy
+backend/feature_chatbot/models/model.safetensors
+backend/.env
 /frontend/android/app/.cxx
 /frontend/linux
 /frontend/windows
