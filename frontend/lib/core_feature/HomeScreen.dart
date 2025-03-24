@@ -211,8 +211,10 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:frontend/feature_chatbot/screens/chat_screen.dart';
 import 'package:frontend/feature_disease_ferti_rec/screens/PaddyDetection.dart';
 import 'package:frontend/feature_scarecrow/screens/GateController.dart';
+import 'package:frontend/feature_scarecrow/screens/ScarecrowController.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'NavBar.dart';
 
@@ -292,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          "H: 32°  L: 27°",
+                          "H: 32°  L: 24°",
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             color: Colors.white70,
@@ -300,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          "Egypt, Mansora",
+                          "Kaduwela",
                           style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -325,19 +327,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 26),
 
               // Main Features Title
               Text(
-                "Main Features",
+                " ප්‍රධාන විශේෂාංග",
                 style: GoogleFonts.poppins(
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
               ),
 
-              const SizedBox(height: 15),
+              const SizedBox(height: 20),
 
               // Feature Cards Grid
               Expanded(
@@ -348,8 +350,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     featureCard(
                       iconPath: 'assets/images/diagnose.png',
-                      title: "Diagnose your crop",
-                      buttonText: "Diagnose Diseases",
+                      title: "රෝග හඳුනා ගන්න",
+                      buttonText: "රෝග විනිශ්චය",
                       onTap: () {
                         Navigator.push(
                           context,
@@ -358,14 +360,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                     featureCard(
-                      iconPath: 'assets/images/soil.png',
-                      title: "Follow your soil status",
-                      buttonText: "Soil Status",
+                      iconPath: 'assets/images/scarecrow.png',
+                      title: "පඹයා හසුරුවන්න",
+                      buttonText: "සුහුරු පඹයා",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ScarecrowController()),
+                        );
+                      },
                     ),
                     featureCard(
                       iconPath: 'assets/images/water.png',
-                      title: "Control Water",
-                      buttonText: "Irrigation Control",
+                      title: "ජලය පාලනය කරන්න",
+                      buttonText: "ජල පාලනය",
                       onTap: () {
                         Navigator.push(
                           context,
@@ -377,6 +385,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       iconPath: 'assets/images/chatbot.png',
                       title: "ගොවි ගැටලු සඳහා පිළිතුරු",
                       buttonText: "ගොවි ගුරු",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const ChatScreen()),
+                        );
+                      },
                     ),
                   ],
                 ),

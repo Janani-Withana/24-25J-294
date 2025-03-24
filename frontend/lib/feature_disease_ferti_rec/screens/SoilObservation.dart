@@ -26,7 +26,7 @@ class _SoilObservationState extends State<SoilObservation> {
     "01/01/2024"
   ];
 
-  final String defaultImagePath = 'images/soil.png';
+  final String defaultImagePath = 'assets/images/soil.png';
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +47,12 @@ class _SoilObservationState extends State<SoilObservation> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset(
-                    'images/srigoviya_logo.png',
+                    'assets/images/srigoviya_logo.png',
                     height: 30,
                   ),
                   const CircleAvatar(
                     radius: 18,
-                    backgroundImage: AssetImage('images/profile.png'),
+                    backgroundImage: AssetImage('assets/images/profile.png'),
                   ),
                 ],
               ),

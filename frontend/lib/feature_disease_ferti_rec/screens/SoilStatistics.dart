@@ -33,12 +33,12 @@ class _SoilStatisticsState extends State<SoilStatistics> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset(
-                    'images/srigoviya_logo.png',
+                    'assets/images/srigoviya_logo.png',
                     height: 30,
                   ),
                   const CircleAvatar(
                     radius: 18,
-                    backgroundImage: AssetImage('images/profile.png'),
+                    backgroundImage: AssetImage('assets/images/profile.png'),
                   ),
                 ],
               ),

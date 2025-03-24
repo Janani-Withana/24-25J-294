@@ -195,19 +195,19 @@ class _PaddyDetectionState extends State<PaddyDetection> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset(
-                    'images/srigoviya_logo.png',
+                    'assets/images/srigoviya_logo.png',
                     height: 30,
                   ),
                   const CircleAvatar(
                     radius: 18,
-                    backgroundImage: AssetImage('images/profile.png'),
+                    backgroundImage: AssetImage('assets/images/profile.png'),
                   ),
                 ],
               ),
               const SizedBox(height: 30),
               Center(
                 child: Image.asset(
-                  'images/paddyDetectionMain.png',
+                  'assets/images/paddyDetectionMain.png',
                   height: 120,
                 ),
               ),
@@ -229,7 +229,7 @@ class _PaddyDetectionState extends State<PaddyDetection> {
                   mainAxisSpacing: 15,
                   children: [
                     featureCard(
-                      iconPath: 'images/diseaseDetecton.png',
+                      iconPath: 'assets/images/diseaseDetecton.png',
                       title: "රෝග හඳුනා ගැනීම",
                       buttonText: "➔",
                       onTap: () {
@@ -240,7 +240,7 @@ class _PaddyDetectionState extends State<PaddyDetection> {
                       },
                     ),
                     featureCard(
-                      iconPath: 'images/Group146.png',
+                      iconPath: 'assets/images/Group146.png',
                       title: "ගොයම් නිරීක්ෂණය",
                       buttonText: "➔",
                       onTap: () {
@@ -251,7 +251,7 @@ class _PaddyDetectionState extends State<PaddyDetection> {
                       },
                     ),
                     featureCard(
-                      iconPath: 'images/soil.png',
+                      iconPath: 'assets/images/soil.png',
                       title: "පසෙහි ගුණාත්මක භාවය",
                       buttonText: "➔",
                       onTap: () {
@@ -262,7 +262,7 @@ class _PaddyDetectionState extends State<PaddyDetection> {
                       },
                     ),
                     featureCard(
-                      iconPath: 'images/Group147.png',
+                      iconPath: 'assets/images/Group147.png',
                       title: "පොහොර නිර්දේශ ඉතිහාසය",
                       buttonText: "➔",
                       onTap: () {

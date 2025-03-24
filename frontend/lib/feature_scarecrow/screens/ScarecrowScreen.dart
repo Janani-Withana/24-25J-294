@@ -19,7 +19,7 @@ class _ScarecrowScreenState extends State<ScarecrowScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset('videos/Elephant.mp4')
+    _controller = VideoPlayerController.asset('assets/images/videos/Elephant.mp4')
       ..initialize().then((_) {
         setState(() {});
         _controller.play();
@@ -49,7 +49,7 @@ class _ScarecrowScreenState extends State<ScarecrowScreen> {
         elevation: 0,
         title: Row(
           children: [
-            Image.asset('images/srigoviya_logo.png', height: 30),
+            Image.asset('assets/images/srigoviya_logo.png', height: 30),
           ],
         ),
         actions: [
