@@ -17,8 +17,8 @@ CORS(app)
 # ------------------------------------------------------
 # Load chatbot components (fine-tuned model, CSV, FAISS index)
 # ------------------------------------------------------
-MODEL_PATH = "Janani-Withana/sinhala-farming-qa-model"
-#MODEL_PATH = "feature_chatbot/models/fine_tuned_multilingual_model"
+#MODEL_PATH = "Janani-Withana/sinhala-farming-qa-model"
+MODEL_PATH = "feature_chatbot/models/fine_tuned_multilingual_model"
 FAISS_INDEX_PATH = "feature_chatbot/data/faiss_index.bin"
 QA_CSV_PATH = "feature_chatbot/data/sinhala_farming_data.csv"
 
@@ -59,7 +59,8 @@ def chat():
         print(best_question,best_answer)
 
         if best_answer:
-            return jsonify({"reply": best_answer})
+            final_answer = generate_refined_answer(user_query, best_answer)
+            return jsonify({"reply": final_answer})
         else:
             return jsonify({"reply": "සුදුසු පිළිතුරක් නොමැත ⚠️"})
 

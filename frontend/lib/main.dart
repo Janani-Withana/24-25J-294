@@ -23,11 +23,11 @@ void main() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   runApp(
-    // DevicePreview(
-    //   enabled: true, // Set to false for production
-    //   builder: (context) => const MyApp(),
-    // ),
-    const MyApp()
+    DevicePreview(
+      enabled: true, // Set to false for production
+      builder: (context) => const MyApp(),
+    ),
+    //const MyApp()
   );
 }
 
