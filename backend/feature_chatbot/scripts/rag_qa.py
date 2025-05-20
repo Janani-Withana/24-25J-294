@@ -11,6 +11,7 @@ from sentence_transformers import (
     util
 )
 from torch.utils.data import DataLoader
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -122,37 +123,33 @@ def retrieve_answer(
         return None, None
 
 # -----------------------------
-# 4) Optionally Refine with Gemini (If you have Gemini available)
+# 4) Refine with FlanT5-base
 # -----------------------------
 def generate_refined_answer(
     user_query: str,
     retrieved_answer: str,
+    model_name: str = "google/flan-t5-base",
+    max_length: int = 512
 ) -> str:
+    if not retrieved_answer:
+        return "No suitable context found to generate an answer."
     
-    gemini_model = None
-    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-    if GEMINI_API_KEY:
-        if configure_gemini is not None:
-            gemini_model = configure_gemini(GEMINI_API_KEY)
-        else:
-            print("configure_gemini is None, cannot configure Gemini.")
-    else:
-        print("GEMINI_API_KEY not set.")
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
-    if gemini_model is not None and call_gemini_api is not None:
-        if retrieved_answer:
-            prompt = (
-                f"භාවිතා කළ යුතු පිළිතුර: {retrieved_answer}\n"
-                "කරුණාකර මෙම පිළිතුර වැඩිදියුණු කරන්න."
-            )
-        else:
-            prompt = (
-                "භාවිතා කළ යුතු පිළිතුරක් නොමැත.\n"
-                f"කරුණාකර මෙම ප්‍රශ්නයට විස්තරාත්මක පිළිතුරක් ලබාදෙන්න:\n{user_query}"
-            )
-        return call_gemini_api(gemini_model, prompt)
-    else:
-        # No Gemini -> just return the retrieved answer or fallback
+        prompt = (
+            f"Context: {retrieved_answer}\n"
+            f"Question: {user_query}\n"
+            f"Answer:"
+        )
+
+        inputs = tokenizer(prompt, return_tensors="pt", truncation=True)
+        outputs = model.generate(**inputs, max_length=max_length, num_beams=5, early_stopping=True)
+        return tokenizer.decode(outputs[0], skip_special_tokens=True)
+    
+    except Exception as e:
+        print(f"Error generating answer: {e}")
         return retrieved_answer if retrieved_answer else "No suitable answer found."
 
 

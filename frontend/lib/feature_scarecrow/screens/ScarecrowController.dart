@@ -101,12 +101,12 @@ class _ScarecrowControllerState extends State<ScarecrowController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset(
-                    'images/srigoviya_logo.png',
+                    'assets/images/srigoviya_logo.png',
                     height: 30,
                   ),
                   const CircleAvatar(
                     radius: 18,
-                    backgroundImage: AssetImage('images/profile.png'),
+                    backgroundImage: AssetImage('assets/images/profile.png'),
                   ),
                 ],
               ),
@@ -121,7 +121,7 @@ class _ScarecrowControllerState extends State<ScarecrowController> {
               ),
               const SizedBox(height: 20),
               Image.asset(
-                'images/watergate.png', // Replace with actual image path
+                'assets/images/watergate.png', // Replace with actual image path
                 height: 150,
               ),
               const SizedBox(height: 30),

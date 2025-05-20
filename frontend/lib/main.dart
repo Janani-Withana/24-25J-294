@@ -40,11 +40,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       useInheritedMediaQuery: true,
 
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
-      //home: HomeScreen(),
+      // locale: DevicePreview.locale(context),
+      // builder: DevicePreview.appBuilder,
+      
+      home: HomeScreen(),
       //home: LoginScreen(),
-      home: const ChatScreen(),
+      //home: const ChatScreen(),
       //home: MoistureScreen(),
       //home: ScarecrowController(),
       

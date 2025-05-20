@@ -20,7 +20,7 @@ class _ObservationDetailState extends State<ObservationDetail> {
     });
   }
 
-  final String defaultImagePath = 'images/default_paddy.png';
+  final String defaultImagePath = 'assets/images/default_paddy.png';
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +41,12 @@ class _ObservationDetailState extends State<ObservationDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset(
-                    'images/srigoviya_logo.png',
+                    'assets/images/srigoviya_logo.png',
                     height: 30,
                   ),
                   const CircleAvatar(
                     radius: 18,
-                    backgroundImage: AssetImage('images/profile.png'),
+                    backgroundImage: AssetImage('assets/images/profile.png'),
                   ),
                 ],
               ),
