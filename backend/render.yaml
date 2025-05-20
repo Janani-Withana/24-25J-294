@@ -3,6 +3,5 @@ services:
     name: sinhala-chatbot-api
     env: python
     plan: free
-    rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: python app.py
