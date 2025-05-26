@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:device_preview/device_preview.dart';
+// import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:frontend/core_feature/HomeScreen.dart';
-import 'package:frontend/core_feature/login_screen';
+//import 'package:frontend/core_feature/login_screen.dart';
 import 'package:frontend/feature_scarecrow/screens/GateController.dart';
 import 'package:frontend/feature_scarecrow/screens/ScarecrowController.dart';
 import 'firebase_options.dart'; // Ensure this import exists
@@ -21,15 +21,15 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform, // Pass options properly
   );
 
-    // Initialize Firebase Messaging
+  // Initialize Firebase Messaging
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   runApp(
-    DevicePreview(
-      enabled: true, // Set to false for production
-      builder: (context) => const MyApp(),
-    ),
-    //const MyApp()
+    // DevicePreview(
+    //   enabled: true, // Set to false for production
+    //   builder: (context) => const MyApp(),
+    // ),
+    const MyApp(), // Use this instead when DevicePreview is disabled
   );
 }
 
@@ -44,15 +44,12 @@ class MyApp extends StatelessWidget {
 
       // locale: DevicePreview.locale(context),
       // builder: DevicePreview.appBuilder,
-      
+
       home: HomeScreen(),
       //home: LoginScreen(),
       //home: const ChatScreen(),
       //home: MoistureScreen(),
       //home: ScarecrowController(),
-      
     );
   }
 }
-
-

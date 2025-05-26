@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/core_feature/HomeScreen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'chat_history.dart';
@@ -53,8 +54,8 @@ class _ChatScreenState extends State<ChatScreen> {
         final data = doc.data();
         if (data.containsKey("question") && data.containsKey("answer")) {
           // each doc → TWO bubbles
-          session.add({"user": data["question"]}); 
-          session.add({"bot": data["answer"]}); 
+          session.add({"user": data["question"]});
+          session.add({"bot": data["answer"]});
         }
       }
 
@@ -140,7 +141,14 @@ class _ChatScreenState extends State<ChatScreen> {
             elevation: 0,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          HomeScreen()), // Replace HomePage() with your actual homepage widget
+                );
+              },
             ),
             title: const Text(
               'ගොවි ගුරු',
@@ -197,7 +205,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 : const Radius.circular(16),
                           ),
                         ),
-                        child: SelectableText( 
+                        child: SelectableText(
                           isUser ? message["user"]! : message["bot"]!,
                           style: TextStyle(
                             color: isUser ? Colors.white : Colors.black,
