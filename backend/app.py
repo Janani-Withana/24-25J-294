@@ -7,6 +7,8 @@ import pandas as pd
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
+import firebase_admin
+from firebase_admin import credentials, firestore
 
 from feature_chatbot.scripts import retrieve_answer, generate_refined_answer
 
@@ -21,6 +23,14 @@ MODEL_PATH = "Janani-Withana/sinhala-farming-qa-model"
 #MODEL_PATH = "feature_chatbot/models/fine_tuned_multilingual_model"
 FAISS_INDEX_PATH = "feature_chatbot/data/faiss_index.bin"
 QA_CSV_PATH = "feature_chatbot/data/sinhala_farming_data.csv"
+
+
+# ------------------------------------------------------
+# Load credentials from JSON file (download from Firebase Console)
+# ------------------------------------------------------
+cred = credentials.Certificate("serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
 
 try:
     # Load model
@@ -43,6 +53,7 @@ def chat():
     try:
         data = request.json
         user_query = data.get("message", "")
+        user_id = data.get("user_id", "anonymous")
 
         if not user_query:
             return jsonify({'error': 'No question provided'}), 400
@@ -60,17 +71,19 @@ def chat():
 
         if best_answer:
             final_answer = generate_refined_answer(user_query, best_answer)
-            return jsonify({"reply": final_answer})
         else:
-            return jsonify({"reply": "සුදුසු පිළිතුරක් නොමැත ⚠️"})
+            final_answer = "සුදුසු පිළිතුරක් නොමැත ⚠️"
 
-        # (Optional) call generate_refined_answer to process with Gemini
-        # if best_answer:
-        #     final_response = generate_refined_answer(user_query, best_answer)
-        #     return jsonify({"reply": final_response})
-        # else:
-        #     return jsonify({"reply": "No suitable answer found."})
-        
+       # Store chat in Firestore
+        chat_data = {
+            "question": user_query,
+            "answer": final_answer,
+            "timestamp": firestore.SERVER_TIMESTAMP
+        }
+        db.collection("chat_history").document(user_id).collection("messages").add(chat_data)
+
+        return jsonify({"reply": final_answer})
+
 
     except Exception as e:
         logging.error(f"Error occurred: {e}")

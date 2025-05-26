@@ -12,14 +12,6 @@ from sentence_transformers import (
 )
 from torch.utils.data import DataLoader
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-from dotenv import load_dotenv
-load_dotenv()
-
-try:
-    from gemini_api import configure_gemini, call_gemini_api
-except ImportError:
-    configure_gemini = None
-    call_gemini_api = None
 
 # -----------------------------
 # 1) Fine-Tuning Function
@@ -139,14 +131,26 @@ def generate_refined_answer(
         model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
         prompt = (
+            f"Answer the following question based on the sinhala context.\n\n"
             f"Context: {retrieved_answer}\n"
             f"Question: {user_query}\n"
             f"Answer:"
         )
 
         inputs = tokenizer(prompt, return_tensors="pt", truncation=True)
-        outputs = model.generate(**inputs, max_length=max_length, num_beams=5, early_stopping=True)
-        return tokenizer.decode(outputs[0], skip_special_tokens=True)
+        outputs = model.generate(
+            **inputs, 
+            max_length=max_length, 
+            num_beams=5, 
+            early_stopping=True,
+            pad_token_id=tokenizer.eos_token_id
+        )
+        final_answer = tokenizer.decode(outputs[0], skip_special_tokens=True).strip()
+
+        if not final_answer:
+            return retrieved_answer
+
+        return final_answer
     
     except Exception as e:
         print(f"Error generating answer: {e}")

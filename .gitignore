@@ -14,6 +14,7 @@ backend/feature_disease_ferti_rec/dicease_detect/y_train.npy
 backend/feature_disease_ferti_rec/dicease_detect/y_val.npy
 backend/feature_chatbot/models/fine_tuned_multilingual_model/model.safetensors
 backend/env
+backend/serviceAccountKey.json
 /frontend/android/app/.cxx
 /frontend/linux
 /frontend/windows
